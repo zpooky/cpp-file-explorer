@@ -78,7 +78,7 @@
     <ClCompile Include="BinarySemaphore.cpp" />
     <ClCompile Include="FolderExplorer.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="movieTraverser.cpp" />
+    <ClCompile Include="MovieTraverser.cpp" />
     <ClCompile Include="spFunc.cpp" />
     <ClCompile Include="thread.cpp" />
   </ItemGroup>
@@ -86,7 +86,7 @@
     <ClInclude Include="BasicXMLMovieWriter.h" />
     <ClInclude Include="BinarySemaphore.h" />
     <ClInclude Include="FolderExplorer.h" />
-    <ClInclude Include="movieTraverser.h" />
+    <ClInclude Include="MovieTraverser.h" />
     <ClInclude Include="spFunc.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="thread.h" />

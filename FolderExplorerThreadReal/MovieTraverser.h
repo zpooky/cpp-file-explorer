@@ -3,23 +3,12 @@
 
 #pragma once
 
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-
-#ifndef _UNICODE
-#define _UNICODE
-#endif
-
-#ifndef NULL
-#define NULL 0
-#endif
-
 #include <string>
 #include <fstream>
 #include <wchar.h>
 #include <vector>
  
+#include "stdafx.h"
 #include "thread.h"
 #include "FolderExplorer.h"
 #include "BinarySemaphore.h"

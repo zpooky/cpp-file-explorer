@@ -7,4 +7,12 @@
 #define NULL 0
 #endif
 
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+
+#ifndef _UNICODE
+#define _UNICODE
+#endif
+
 #endif

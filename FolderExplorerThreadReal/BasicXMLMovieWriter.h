@@ -3,8 +3,12 @@
 
 #pragma once
 
+#include "stdafx.h"
+
+#include <wchar.h>
 #include <string>
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 

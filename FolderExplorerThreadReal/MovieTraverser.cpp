@@ -118,7 +118,7 @@ bool MovieTraverser::visit(const wchar_t *file,const wchar_t *path)
 {
 	if(this->checkExt(file)){
 		MovieTraverser::sem->wait(this->TID);
-		MovieTraverser::write(file,path);
+		MovieTraverser::writeXML(file,path);
 		MovieTraverser::sem->signal();
 	}
 	return true;
@@ -130,6 +130,7 @@ void MovieTraverser::write(const wchar_t *file,const wchar_t *path)
 void MovieTraverser::writeXML(const wchar_t *file,const wchar_t *path)
 {
 	static BasicXMLMovieWriter xml(MovieTraverser::out);
+	xml.element(file,path);
 }
 bool MovieTraverser::checkExt(const wchar_t *file)
 {
@@ -177,7 +178,7 @@ void MovieTraverser::init()
 	if(MovieTraverser::initCount == 0){
 		//MovieTraverser::sem = new BinarySemaphore();
 		//MovieTraverser::out = new wofstream();
-		MovieTraverser::out->open("movies.txt",ios::out);
+		MovieTraverser::out->open("movies.xml",ios::out);
 	}
 	++MovieTraverser::initCount;
 }
