@@ -14,8 +14,8 @@ FolderExplorer::FolderExplorer()
 
 FolderExplorer::~FolderExplorer()
 {
-	if(this->path != NULL)
-		delete[]this->path;
+	//if(this->path != NULL)
+	//	delete[]this->path;
 }
 bool FolderExplorer::open(wstring path)
 {
@@ -48,12 +48,14 @@ void FolderExplorer::convert(wstring dir)
 	//@TODO this two lines result in a crash
 	//if(this->path != NULL)
 	//	delete[]this->path;
+	//if unicode is TCHAR is wchar_t. find out a way to make that so "new" do not have to be called.c string
+	//this->path = dir.c_str();
 	this->path = new TCHAR[dir.size()+1];
-	this->path[dir.size()] = 0;
-	this->nrOfPath = (int)dir.size();
+	this->path[dir.size()] = 0;//'\0' ???
+	this->nrOfPath = dir.size();
 	//As much as we'd love to, we can't use memcpy() because
 	//sizeof(TCHAR)==sizeof(char) may not be true:
-	for(int i=0;i<(int)dir.size();++i){
+	for(unsigned int i=0;i<dir.size();++i){
 		this->path[i] = dir[i];
 	}
 }

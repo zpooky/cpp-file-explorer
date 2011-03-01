@@ -25,21 +25,22 @@ public:
 	/**PUBLIC CONSTRUCTS**/
 	thread();
 	/**PUBLIC OPERATORS**/
+	//void operator delete(void *t);
 	/**PUBLIC DESTRUCT**/
 	virtual ~thread();
 	/**PUBLIC STATIC FUNCTIONS**/
 	/**PUBLIC VARIABLES**/
+	uintptr_t TID;
 	/**PUBLIC FUNCTIONS**/
 	void start();
 	void notify();
 	void wait();
 	void exit();
 	void exitAll();
-	bool isThreaded();
+	bool isActive();
 private:
 	/**PRIVATE STATIC VARIABLES**/
 	/**PRIVATE VARIABLES**/
-	bool threaded;
 	unsigned int xx;
 	/**PRIVATE FUNCTIONS**/
 	/**PRIVATE STATIC FUNCTIONS**/
@@ -48,6 +49,6 @@ protected:
 	/**PROTECTED FUNCTIONS**/
 	virtual void life();
 	/**PROTECTED VARIABLES**/
-	uintptr_t TID;
+	//uintptr_t TID;
 };
 #endif

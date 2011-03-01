@@ -12,6 +12,7 @@
 #include "thread.h"
 #include "FolderExplorer.h"
 #include "BinarySemaphore.h"
+#include "BasicXMLMovieWriter.h"
 
 using namespace std;
 
@@ -28,8 +29,9 @@ private:
 	vector<wchar_t*> movieExt;
 	/**STATIC VARIABLES**/
 	static int initCount;
-	static BinarySemaphore *sem;
-	static wofstream *out;
+	static BinarySemaphore *mSem;
+	static BasicXMLMovieWriter *mXMLWriter;
+	static wofstream *mOut;
 	/**FUNCTIONS**/
 	void initiate(wchar_t *root);
 	bool visit(const wchar_t *file,const wchar_t *path);

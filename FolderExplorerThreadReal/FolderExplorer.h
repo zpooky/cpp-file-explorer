@@ -44,7 +44,7 @@ private:
 	//PATH
 	wstring plainPath;
 	TCHAR *path;
-	int nrOfPath;
+	unsigned int nrOfPath;
 	//FILTER NAME
 	vector<wstring> filterData;
 	//

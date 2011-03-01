@@ -3,14 +3,14 @@
 #include <regex>
 
 #include "spFunc.h"
-#include "BasicXMLMovieWriter.h"
 
 using namespace std;
 using namespace tr1;
 
 int MovieTraverser::initCount = 0;
-BinarySemaphore* MovieTraverser::sem = new BinarySemaphore();
-wofstream* MovieTraverser::out = new wofstream();
+BinarySemaphore* MovieTraverser::mSem = new BinarySemaphore();
+wofstream* MovieTraverser::mOut = new wofstream();
+BasicXMLMovieWriter* MovieTraverser::mXMLWriter = new BasicXMLMovieWriter(MovieTraverser::mOut);
 
 MovieTraverser::MovieTraverser() : thread()
 {
@@ -117,20 +117,19 @@ void MovieTraverser::initiate(wchar_t *root)
 bool MovieTraverser::visit(const wchar_t *file,const wchar_t *path)
 {
 	if(this->checkExt(file)){
-		MovieTraverser::sem->wait(this->TID);
+		MovieTraverser::mSem->wait(this->TID);
 		MovieTraverser::writeXML(file,path);
-		MovieTraverser::sem->signal();
+		MovieTraverser::mSem->signal();
 	}
 	return true;
 }
 void MovieTraverser::write(const wchar_t *file,const wchar_t *path)
 {
-	*MovieTraverser::out<<file<<L"|"<<path<<file<<endl;
+	*MovieTraverser::mOut<<file<<L"|"<<path<<file<<endl;
 }
 void MovieTraverser::writeXML(const wchar_t *file,const wchar_t *path)
 {
-	static BasicXMLMovieWriter xml(MovieTraverser::out);
-	xml.element(file,path);
+	MovieTraverser::mXMLWriter->element(file,path);
 }
 bool MovieTraverser::checkExt(const wchar_t *file)
 {
@@ -176,9 +175,7 @@ void MovieTraverser::backFolder()
 void MovieTraverser::init()
 {
 	if(MovieTraverser::initCount == 0){
-		//MovieTraverser::sem = new BinarySemaphore();
-		//MovieTraverser::out = new wofstream();
-		MovieTraverser::out->open("movies.xml",ios::out);
+		MovieTraverser::mOut->open("movies.xml",ios::out);
 	}
 	++MovieTraverser::initCount;
 }
@@ -186,9 +183,15 @@ void MovieTraverser::deInit()
 {
 	--MovieTraverser::initCount;
 	if(MovieTraverser::initCount == 0){
-		cout<<"destroy"<<endl;
-		MovieTraverser::out->close();
-		delete MovieTraverser::out;
-		delete MovieTraverser::sem;
+		cout<<"0"<<endl;
+		//delete this before mOut because XMLWriter use mOut
+		delete MovieTraverser::mXMLWriter;
+		cout<<"1"<<endl;
+		MovieTraverser::mOut->close();
+		cout<<"2"<<endl;
+		delete MovieTraverser::mOut;
+		cout<<"3"<<endl;
+		delete MovieTraverser::mSem;
+		cout<<"4"<<endl;
 	}
 }
