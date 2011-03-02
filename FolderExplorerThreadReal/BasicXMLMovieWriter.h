@@ -16,9 +16,12 @@ class BasicXMLMovieWriter
 {
 private:
 	wofstream *mOutStream;
+	bool mHeader;
 public:
 	BasicXMLMovieWriter(wofstream *out);
+	BasicXMLMovieWriter();
 	~BasicXMLMovieWriter();
+	void setStream(wofstream *out);
 	void header();
 	void element(const wchar_t *file,const wchar_t *path);
 	void footer();

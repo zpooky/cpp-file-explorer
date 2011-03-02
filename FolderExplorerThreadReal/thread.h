@@ -30,14 +30,14 @@ public:
 	virtual ~thread();
 	/**PUBLIC STATIC FUNCTIONS**/
 	/**PUBLIC VARIABLES**/
-	uintptr_t TID;
 	/**PUBLIC FUNCTIONS**/
 	void start();
 	void notify();
 	void wait();
 	void exit();
 	void exitAll();
-	bool isActive();
+	bool isThreaded();
+	void waitToFinish();
 private:
 	/**PRIVATE STATIC VARIABLES**/
 	/**PRIVATE VARIABLES**/
@@ -49,6 +49,6 @@ protected:
 	/**PROTECTED FUNCTIONS**/
 	virtual void life();
 	/**PROTECTED VARIABLES**/
-	//uintptr_t TID;
+	uintptr_t TID;
 };
 #endif

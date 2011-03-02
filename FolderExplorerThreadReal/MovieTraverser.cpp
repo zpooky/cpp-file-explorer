@@ -10,7 +10,7 @@ using namespace tr1;
 int MovieTraverser::initCount = 0;
 BinarySemaphore* MovieTraverser::mSem = new BinarySemaphore();
 wofstream* MovieTraverser::mOut = new wofstream();
-BasicXMLMovieWriter* MovieTraverser::mXMLWriter = new BasicXMLMovieWriter(MovieTraverser::mOut);
+BasicXMLMovieWriter* MovieTraverser::mXMLWriter = new BasicXMLMovieWriter();
 
 MovieTraverser::MovieTraverser() : thread()
 {
@@ -176,6 +176,7 @@ void MovieTraverser::init()
 {
 	if(MovieTraverser::initCount == 0){
 		MovieTraverser::mOut->open("movies.xml",ios::out);
+		MovieTraverser::mXMLWriter->setStream(MovieTraverser::mOut);
 	}
 	++MovieTraverser::initCount;
 }
@@ -183,15 +184,10 @@ void MovieTraverser::deInit()
 {
 	--MovieTraverser::initCount;
 	if(MovieTraverser::initCount == 0){
-		cout<<"0"<<endl;
 		//delete this before mOut because XMLWriter use mOut
 		delete MovieTraverser::mXMLWriter;
-		cout<<"1"<<endl;
 		MovieTraverser::mOut->close();
-		cout<<"2"<<endl;
 		delete MovieTraverser::mOut;
-		cout<<"3"<<endl;
 		delete MovieTraverser::mSem;
-		cout<<"4"<<endl;
 	}
 }

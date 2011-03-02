@@ -39,26 +39,24 @@ void thread::exit(){
 	CloseHandle((HANDLE)this->TID);
 }
 void thread::exitAll(){
-	ExitProcess(1);
+	ExitProcess(1);//close main thread also...
 }
-bool thread::isActive(){
+bool thread::isThreaded(){
 	DWORD status;
 	if(!GetExitCodeThread((HANDLE)this->TID,&status)){
-		return true;
-	}
-	if(status == STILL_ACTIVE){
-		cout<<"STILL_ACTIVE"<<endl;
-	} else {
-		cout<<"default: "<<status<<endl;
+		return true;//fix perhaps count up when max reashed kill thread and return false
 	}
 	return status == STILL_ACTIVE ? true : false;
+}
+void thread::waitToFinish()
+{
+	WaitForSingleObject((HANDLE)this->TID,INFINITE);
 }
 /**PRIVATE FUNCTIONS**/
 unsigned int WINAPI thread::ThreadFunc(void *t)
 {
 	thread *th = (thread*)t;
 	th->life();
-	cout<<"life end"<<endl;
 	//_endthreadex(th->TID);
 	//CloseHandle((HANDLE)th->TID);
 	return 0;

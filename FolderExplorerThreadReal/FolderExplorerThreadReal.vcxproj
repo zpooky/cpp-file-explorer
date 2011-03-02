@@ -77,6 +77,7 @@
     <ClCompile Include="BasicXMLMovieWriter.cpp" />
     <ClCompile Include="BinarySemaphore.cpp" />
     <ClCompile Include="FolderExplorer.cpp" />
+    <ClCompile Include="HarddriveLister.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MovieTraverser.cpp" />
     <ClCompile Include="spFunc.cpp" />
@@ -86,6 +87,7 @@
     <ClInclude Include="BasicXMLMovieWriter.h" />
     <ClInclude Include="BinarySemaphore.h" />
     <ClInclude Include="FolderExplorer.h" />
+    <ClInclude Include="HarddriveLister.h" />
     <ClInclude Include="MovieTraverser.h" />
     <ClInclude Include="spFunc.h" />
     <ClInclude Include="stdafx.h" />
