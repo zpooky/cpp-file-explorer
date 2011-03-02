@@ -1,4 +1,4 @@
-﻿Build started 2011-03-02 21:10:22.
+﻿Build started 2011-03-02 23:54:58.
      1>Project "C:\Users\FREDRO\Documents\Visual Studio 2010\Projects\FolderExplorerThreadReal\FolderExplorerThreadReal\FolderExplorerThreadReal.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\FolderExplorerThreadReal.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -8,7 +8,7 @@
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
-         C:\Program\Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\FREDRO\Documents\Visual Studio 2010\Projects\FolderExplorerThreadReal\Debug\FolderExplorerThreadReal.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\FolderExplorerThreadReal.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\FREDRO\Documents\Visual Studio 2010\Projects\FolderExplorerThreadReal\Debug\FolderExplorerThreadReal.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\FREDRO\Documents\Visual Studio 2010\Projects\FolderExplorerThreadReal\Debug\FolderExplorerThreadReal.lib" /MACHINE:X86 Debug\FolderExplorerThreadReal.exe.embed.manifest.res
+         C:\Program\Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\FREDRO\Documents\Visual Studio 2010\Projects\FolderExplorerThreadReal\Debug\FolderExplorerThreadReal.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\FolderExplorerThreadReal.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\FREDRO\Documents\Visual Studio 2010\Projects\FolderExplorerThreadReal\Debug\FolderExplorerThreadReal.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\FREDRO\Documents\Visual Studio 2010\Projects\FolderExplorerThreadReal\Debug\FolderExplorerThreadReal.lib" /MACHINE:X86 Debug\FolderExplorerThreadReal.exe.embed.manifest.res
          Debug\BasicXMLMovieWriter.obj
          Debug\BinarySemaphore.obj
          Debug\FolderExplorer.obj
@@ -30,4 +30,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.36
+Time Elapsed 00:00:01.83

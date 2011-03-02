@@ -3,11 +3,14 @@
 
 #include "MovieTraverser.h"
 #include "HarddriveLister.h"
-#include <Windows.h>
 #include <stdlib.h>
+#include <direct.h>
 #include <stdio.h>
+#include <tchar.h>
+#include <cmath>
 
 using namespace std;
+
 
 int main(){
 	HarddriveLister *harddriveLister = new HarddriveLister();

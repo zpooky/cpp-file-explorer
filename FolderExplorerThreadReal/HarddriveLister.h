@@ -5,11 +5,15 @@
 
 #include "stdafx.h"
 
+#include <exception>
+
+using namespace std;
+
 class HarddriveLister
 {
 public:
 	HarddriveLister();
 	~HarddriveLister();
-	void list();
+	void list() throw(exception);
 };
 #endif
