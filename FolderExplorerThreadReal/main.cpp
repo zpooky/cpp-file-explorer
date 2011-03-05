@@ -13,8 +13,14 @@ using namespace std;
 
 
 int main(){
+	_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	HarddriveLister *harddriveLister = new HarddriveLister();
-	harddriveLister->list();
+	try{
+		harddriveLister->list();
+	} catch(exception e){
+		cout<<e.what()<<endl;
+	}
+	//harddriveLister->diskinfo();
 	delete harddriveLister;
 	system("pause");
 	return 0;
