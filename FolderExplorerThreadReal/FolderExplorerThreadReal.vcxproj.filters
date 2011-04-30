@@ -18,7 +18,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="BasicXMLMovieWriter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="thread.cpp">
@@ -30,20 +30,23 @@
     <ClCompile Include="FolderExplorer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="movieTraverser.cpp">
+    <ClCompile Include="HarddriveLister.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MovieTraverser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="spFunc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BasicXMLMovieWriter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HarddriveLister.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BasicXMLMovieWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="thread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -53,7 +56,10 @@
     <ClInclude Include="FolderExplorer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="movieTraverser.h">
+    <ClInclude Include="HarddriveLister.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MovieTraverser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="spFunc.h">
@@ -62,18 +68,12 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BasicXMLMovieWriter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HarddriveLister.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="movies.xml">
+    <None Include="movies.txt">
       <Filter>data</Filter>
     </None>
-    <None Include="movies.txt">
+    <None Include="movies.xml">
       <Filter>data</Filter>
     </None>
   </ItemGroup>

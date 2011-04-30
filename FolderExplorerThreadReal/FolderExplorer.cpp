@@ -78,17 +78,19 @@ void FolderExplorer::fetch()
 {
 	int i = 0,
 		nrOfFiles = 0;
-	wchar_t buffer[255];
+	wchar_t buffer[255] = {0};
 	EXP_FILE_DATA obj;
 	do{
 		for(i=0;i<lstrlen(this->data.cFileName)&&i<255;++i){
 			buffer[i] = wchar_t(this->data.cFileName[i]);
 		}
-		obj.FileName = wstring(buffer,i);
-		if(this->filter(obj.FileName)){
+		obj.fileName = wstring(buffer,i);
+		if(this->filter(obj.fileName)){
 			this->files.push_back(obj);
-			this->files.at(nrOfFiles).isFolder = this->data.dwFileAttributes == FILE_ATTRIBUTE_DIRECTORY || this->data.dwFileAttributes == 17 ? true : false;
+			this->files.at(nrOfFiles).filePath = this->path;
+			this->files.at(nrOfFiles).isFolder = (this->data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0;
 			this->files.at(nrOfFiles).dwFileAttributes = this->data.dwFileAttributes;
+			this->files.at(nrOfFiles).mFileAttribute = (FileAttribute)this->data.dwFileAttributes;
 			++nrOfFiles;
 		}
 	}while(FindNextFile(this->handler,&this->data));

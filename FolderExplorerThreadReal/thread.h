@@ -19,15 +19,15 @@
 
 using namespace std;
 
-class thread
+class Thread
 {
 public:
 	/**PUBLIC CONSTRUCTS**/
-	thread();
+	Thread();
 	/**PUBLIC OPERATORS**/
 	//void operator delete(void *t);
 	/**PUBLIC DESTRUCT**/
-	virtual ~thread();
+	virtual ~Thread();
 	/**PUBLIC STATIC FUNCTIONS**/
 	/**PUBLIC VARIABLES**/
 	/**PUBLIC FUNCTIONS**/

@@ -9,22 +9,26 @@
 #include <list>
 #include <vector>
 #include <Windows.h>
-
+#include <stdlib.h>
+#include <stdio.h>
+#include <errno.h>
 using namespace std;
 
 enum DeviceType{LOCAL_HARDDRIVE};
+enum DriveType{DRIVETYPE_UNKNOWN,DRIVETYPE_NO_ROOT_DIR,DRIVETYPE_REMOVABLE,DRIVETYPE_FIXED,DRIVETYPE_REMOTE,DRIVETYPE_CDROM,DRIVETYPE_RAMDISK};
 //http://msdn.microsoft.com/en-us/library/aa364939%28v=VS.85%29.aspx
-//enum DriveType{DRIVE_UNKNOWN,DRIVE_NO_ROOT_DIR,DRIVE_REMOVABLE,DRIVE_FIXED,DRIVE_REMOTE,DRIVE_CDROM,DRIVE_RAMDISK};
+enum FileSystem{NTFS,FAT32};
 
 struct Device
 {
-	wchar_t *label;
+	wchar_t label[MAX_PATH+1];
+	wchar_t root[4];
 	wchar_t diskLetter;
-	DWORD serialNumber;
+	DWORD serial;
 	DeviceType deviceType;
-	//DriveType driveType;
+	DriveType driveType;
 	//HARDDRIVE SPECIFIC?
-	wchar_t *fileSystem;
+	FileSystem fileSystem;
 };
 
 class HarddriveLister
@@ -32,19 +36,19 @@ class HarddriveLister
 public:
 	HarddriveLister();
 	~HarddriveLister();
-	void list() throw(exception);
+	std::list<Device> list();
 private:
-	wstring* mBaseDriveLetter;//list...
-	size_t mBaseDriveLetterSize;
-	//list<LPCWSTR> mBaseDriveLetter;
-	wstring* mDriveLetter;
-	vector<string> test;
-	void getDiskInfo() throw(exception);
+	vector<wstring> *mBaseDriveLetter;
+	vector<wstring> *mDriveLetter;
+	std::list<Device> *mDeviceList;
+	void getDiskInfo();
 	void setDisk(const char *str);
-	void getDriveLetters() throw(exception);
+	void getDriveLetters() throw(...);
 	wstring convert(const char *str);
 	void compile();
 	void getVolumeInformation();
 	bool queryDosDevice(LPCWSTR deviceName,LPWSTR buffer,DWORD &bufferSize);
+	DriveType getDriveType(const wchar_t *driveLetter);
+	Device assign(wchar_t driveLetter,const wchar_t *root,wchar_t *label,DWORD serial,wchar_t *fileSystem,DriveType driveType);
 };
 #endif

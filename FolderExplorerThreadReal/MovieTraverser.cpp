@@ -12,20 +12,23 @@ BinarySemaphore* MovieTraverser::mSem = new BinarySemaphore();
 wofstream* MovieTraverser::mOut = new wofstream();
 BasicXMLMovieWriter* MovieTraverser::mXMLWriter = new BasicXMLMovieWriter();
 
-MovieTraverser::MovieTraverser() : thread()
+MovieTraverser::MovieTraverser() : Thread()
 {
+	this->fe = NULL;
 	MovieTraverser::init();
 	this->initiate(L"C:\\");
 }
-MovieTraverser::MovieTraverser(wchar_t *root) : thread()
+MovieTraverser::MovieTraverser(wchar_t *root) : Thread()
 {
+	this->fe = NULL;
 	MovieTraverser::init();
 	this->initiate(root);
 }
 MovieTraverser::~MovieTraverser()
 {
 	MovieTraverser::deInit();
-	delete this->fe;
+	if(this->fe != NULL)
+		delete this->fe;
 }
 void MovieTraverser::setRoot(wchar_t *root)
 {
@@ -37,23 +40,55 @@ void MovieTraverser::life()
 	vector<wstring> folder;
 	this->curPath = this->root;
 	bool cont = true;
+	bool isFirst = true;
+	wofstream fout("file.txt",ios::out);
+	wofstream pout("pubfolder.txt",ios::out);
+	wofstream mout("misc.txt",ios::out);
+	cout<<"____________"<<endl;
 	do{
+						if(!isFirst){
+				cout<<"begin"<<endl;
+				}
 		folder.clear();
+				if(!isFirst){
+				cout<<"folder.clear();"<<endl;
+				}
+							if(!isFirst){
+				wcout<<this->curPath<<endl;
+				}
 		if(this->fe->open(this->curPath)){
+			if(!isFirst){
+				cout<<"if(this->fe->open(this->curPath)){"<<endl;
+				}
 			for(unsigned int i=0;i<this->fe->files.size();++i){
+				if(!isFirst){
+				cout<<i<<endl;
+				}
+				if(this->fe->files[i].dwFileAttributes == 32){
+				fout<<this->curPath<<this->fe->files[i].fileName<<L"|\t"<<this->fe->files[i].dwFileAttributes<<endl;
+				} else
+					if(this->fe->files[i].dwFileAttributes == 16){
+						pout<<this->curPath<<this->fe->files[i].fileName<<L"|\t"<<this->fe->files[i].dwFileAttributes<<endl;
+					} else {
+						mout<<this->curPath<<this->fe->files[i].fileName<<L"|\t"<<this->fe->files[i].dwFileAttributes<<endl;
+					}
 				//wcout<<this->fe->files.at(i).FileName<<" |"<<this->fe->files.at(i).isFolder<<"|"<<this->fe->files.at(i).dwFileAttributes<<endl;
 				if(this->fe->files[i].dwFileAttributes == 18 || this->fe->files[i].dwFileAttributes == 22 || this->fe->files[i].dwFileAttributes == 48){
 
 				} else
 				if(this->fe->files[i].isFolder){
-					folder.push_back(this->fe->files.at(i).FileName);
+					folder.push_back(this->fe->files.at(i).fileName);
 				} else 
 				if(!this->isBack){
-					this->visit(this->fe->files.at(i).FileName.c_str(),this->curPath.c_str());
+					this->visit(this->fe->files.at(i).fileName.c_str(),this->curPath.c_str());
 				}
+			}
+			if(!isFirst){
+
 			}
 			this->prevFolder = this->curPath;
 			if(this->isBack){
+				cout<<"this->isBack"<<endl;
 				bool verify = true;
 				for(unsigned int i=0;i<folder.size() && verify;++i){
 					//cout<<"|"<<this->curFolder<<"| |"<<folder[i]<<"|"<<endl;
@@ -76,6 +111,7 @@ void MovieTraverser::life()
 				}
 			} else
 			if(!this->isBack){
+				cout<<"!this->isBack"<<endl;
 				unsigned int i = 0;
 				if(i<folder.size()){
 					this->isBack = false;
@@ -94,6 +130,8 @@ void MovieTraverser::life()
 			cont = false;
 			cout<<"false"<<endl;
 		}
+		cout<<"2.5"<<endl;
+		isFirst = false;
 	}while(cont);
 	wcout<<endl<<L"done: "<<this->root<<endl;
 }
@@ -104,6 +142,8 @@ void MovieTraverser::initiate(wchar_t *root)
 	this->root = root;
 	this->curPath = this->root;
 	this->isBack = false;
+	if(this->fe != NULL)
+		delete this->fe;
 	this->fe = new FolderExplorer();
 	this->fe->addFilter(L"..");
 	this->fe->addFilter(L".");
@@ -183,7 +223,7 @@ void MovieTraverser::init()
 void MovieTraverser::deInit()
 {
 	--MovieTraverser::initCount;
-	if(MovieTraverser::initCount == 0){
+	if(MovieTraverser::initCount <= 0){
 		//delete this before mOut because XMLWriter use mOut
 		delete MovieTraverser::mXMLWriter;
 		MovieTraverser::mOut->close();

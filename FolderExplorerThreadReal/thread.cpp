@@ -1,68 +1,72 @@
-#include "thread.h"
+#include "Thread.h"
 
 using namespace std;
 
 /**PUBLIC CONSTRUCTS**/
-thread::thread()
+Thread::Thread()
 {
+	this->xx = 0;
 }
 /**PUBLIC OPERATORS**/
-/*void thread::operator delete(void *t)
+/*void Thread::operator delete(void *t)
 {
 	if(t != NULL){
 		cout<<"asdasdaas"<<endl;
-		thread *th = (thread*)t;
+		Thread *th = (Thread*)t;
 		th->exit();
 		delete th;
 		th = NULL;
 	}
 }*/
 /**PUBLIC DESTRUCT**/
-thread::~thread()
+Thread::~Thread()
 {
 }
 /**PUBLIC STATIC FUNCTIONS**/
 /**PUBLIC FUNCTIONS**/
-void thread::start()
+void Thread::start()
 {
 	this->TID = _beginthreadex(NULL,0,ThreadFunc,(void*)this,0,&this->xx);
 }
-void thread::notify()
+void Thread::notify()
 {//ready
 
 }
-void thread::wait()
+void Thread::wait()
 {//sleep
 
 }
-void thread::exit(){
+void Thread::exit(){
 	CloseHandle((HANDLE)this->TID);
 }
-void thread::exitAll(){
-	ExitProcess(1);//close main thread also...
+void Thread::exitAll(){
+	ExitProcess(1);//close main Thread also...
 }
-bool thread::isThreaded(){
+bool Thread::isThreaded(){
 	DWORD status;
 	if(!GetExitCodeThread((HANDLE)this->TID,&status)){
-		return true;//fix perhaps count up when max reashed kill thread and return false
+		return true;//fix perhaps count up when max reashed kill Thread and return false
 	}
 	return status == STILL_ACTIVE ? true : false;
 }
-void thread::waitToFinish()
+void Thread::waitToFinish()
 {
 	WaitForSingleObject((HANDLE)this->TID,INFINITE);
 }
 /**PRIVATE FUNCTIONS**/
-unsigned int WINAPI thread::ThreadFunc(void *t)
+unsigned int WINAPI Thread::ThreadFunc(void *t)
 {
-	thread *th = (thread*)t;
+	cout<<"1"<<endl;
+	Thread *th = (Thread*)t;
+	cout<<"2"<<endl;
 	th->life();
+	cout<<"3"<<endl;
 	//_endthreadex(th->TID);
 	//CloseHandle((HANDLE)th->TID);
 	return 0;
 }
 /**PROTECTED FUNCTIONS**/
-void thread::life()
+void Thread::life()
 {
-	cout<<"thread with no life code!"<<endl;
+	cout<<"Thread with no life code!"<<endl;
 }

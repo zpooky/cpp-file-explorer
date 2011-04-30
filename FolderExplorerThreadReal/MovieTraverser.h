@@ -7,16 +7,16 @@
 #include <fstream>
 #include <wchar.h>
 #include <vector>
- 
+
 #include "stdafx.h"
-#include "thread.h"
+#include "Thread.h"
 #include "FolderExplorer.h"
 #include "BinarySemaphore.h"
 #include "BasicXMLMovieWriter.h"
 
 using namespace std;
 
-class MovieTraverser : public thread
+class MovieTraverser : public Thread
 {
 private:
 	/**VARIABLES**/
