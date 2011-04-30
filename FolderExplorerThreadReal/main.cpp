@@ -59,6 +59,8 @@ int main(){
 	}*/
 	mt[0] = new MovieTraverser(L"D:\\");
 		mt[0]->start();
+		mt[0]->waitToFinish();
+			delete mt[0];
 	/*for(size_t a=0;a<deviceList.size();++a){
 		if(mt[a] != NULL){
 			mt[a]->waitToFinish();

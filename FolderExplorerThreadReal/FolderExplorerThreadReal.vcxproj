@@ -17,13 +17,13 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>Dynamic</UseOfMfc>
+    <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
@@ -92,6 +92,7 @@
     <ClInclude Include="FolderExplorer.h" />
     <ClInclude Include="HarddriveLister.h" />
     <ClInclude Include="MovieTraverser.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="spFunc.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="thread.h" />
@@ -99,6 +100,9 @@
   <ItemGroup>
     <None Include="movies.txt" />
     <None Include="movies.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="FolderExplorerThreadReal.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

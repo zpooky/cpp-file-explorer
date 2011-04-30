@@ -1,14 +1,17 @@
-﻿Build started 2011-04-30 11:40:47.
+﻿Build started 2011-04-30 22:13:46.
      1>Project "C:\Users\FREDRO\Documents\Visual Studio 2010\Projects\FolderExplorerThreadReal\FolderExplorerThreadReal\FolderExplorerThreadReal.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Touching "Debug\FolderExplorerThreadReal.unsuccessfulbuild".
+         Creating "Debug\FolderExplorerThreadReal.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program\Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _WINDLL /D _UNICODE /D UNICODE /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt MovieTraverser.cpp
-         MovieTraverser.cpp
+         C:\Program\Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+       ResourceCompile:
+         All outputs are up-to-date.
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
-         C:\Program\Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\FREDRO\Documents\Visual Studio 2010\Projects\FolderExplorerThreadReal\Debug\FolderExplorerThreadReal.dll" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\FolderExplorerThreadReal.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\FREDRO\Documents\Visual Studio 2010\Projects\FolderExplorerThreadReal\Debug\FolderExplorerThreadReal.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\FREDRO\Documents\Visual Studio 2010\Projects\FolderExplorerThreadReal\Debug\FolderExplorerThreadReal.lib" /MACHINE:X86 /DLL Debug\FolderExplorerThreadReal.dll.embed.manifest.res
+         C:\Program\Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\FREDRO\Documents\Visual Studio 2010\Projects\FolderExplorerThreadReal\Debug\FolderExplorerThreadReal.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\FolderExplorerThreadReal.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\FREDRO\Documents\Visual Studio 2010\Projects\FolderExplorerThreadReal\Debug\FolderExplorerThreadReal.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\FREDRO\Documents\Visual Studio 2010\Projects\FolderExplorerThreadReal\Debug\FolderExplorerThreadReal.lib" /MACHINE:X86 Debug\FolderExplorerThreadReal.res
+         Debug\FolderExplorerThreadReal.exe.embed.manifest.res
          Debug\BasicXMLMovieWriter.obj
          Debug\BinarySemaphore.obj
          Debug\FolderExplorer.obj
@@ -18,11 +21,11 @@
          Debug\spFunc.obj
          Debug\thread.obj
        Manifest:
-         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\FolderExplorerThreadReal.dll.embed.manifest" /manifest Debug\FolderExplorerThreadReal.dll.intermediate.manifest "C:\Program\Visual Studio 10.0\VC\Include\Manifest\dpiaware.manifest"
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\FolderExplorerThreadReal.exe.embed.manifest" /manifest Debug\FolderExplorerThreadReal.exe.intermediate.manifest "C:\Program\Visual Studio 10.0\VC\Include\Manifest\dpiaware.manifest"
          All outputs are up-to-date.
        LinkEmbedManifest:
          All outputs are up-to-date.
-         FolderExplorerThreadReal.vcxproj -> C:\Users\FREDRO\Documents\Visual Studio 2010\Projects\FolderExplorerThreadReal\Debug\FolderExplorerThreadReal.dll
+         FolderExplorerThreadReal.vcxproj -> C:\Users\FREDRO\Documents\Visual Studio 2010\Projects\FolderExplorerThreadReal\Debug\FolderExplorerThreadReal.exe
        FinalizeBuildStatus:
          Deleting file "Debug\FolderExplorerThreadReal.unsuccessfulbuild".
          Touching "Debug\FolderExplorerThreadReal.lastbuildstate".
@@ -30,4 +33,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.34
+Time Elapsed 00:00:03.29

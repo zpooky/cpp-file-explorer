@@ -38,7 +38,7 @@ void FolderExplorer::addFilter(wstring name)
 {
 	this->filterData.push_back(name);
 }
-int FolderExplorer::length()const
+int FolderExplorer::length() const
 {
 	return this->files.size();
 }
@@ -50,8 +50,8 @@ void FolderExplorer::convert(wstring dir)
 	//	delete[]this->path;
 	//if unicode is TCHAR is wchar_t. find out a way to make that so "new" do not have to be called.c string
 	//this->path = dir.c_str();
-	this->path = new TCHAR[dir.size()+1];
-	this->path[dir.size()] = 0;//'\0' ???
+	this->path = new wchar_t[dir.size()+1];
+	this->path[dir.size()] = 0;
 	this->nrOfPath = dir.size();
 	//As much as we'd love to, we can't use memcpy() because
 	//sizeof(TCHAR)==sizeof(char) may not be true:
@@ -72,7 +72,13 @@ bool FolderExplorer::pathLength()
 }
 void FolderExplorer::prepare()
 {
-	StringCchCat(this->path,MAX_PATH,TEXT("\\*"));
+	size_t last = wcslen(this->path);
+	last = last-1 >= 0 ? last-1 : 0;
+	if(this->path[last] != L'\\'){
+		StringCchCat(this->path,MAX_PATH,TEXT("\\*"));
+	} else {
+		StringCchCat(this->path,MAX_PATH,TEXT("*"));
+	}
 }
 void FolderExplorer::fetch()
 {

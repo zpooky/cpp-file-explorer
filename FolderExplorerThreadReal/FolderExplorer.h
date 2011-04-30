@@ -62,7 +62,7 @@ class FolderExplorer
 private:
 	//PATH
 	wstring plainPath;
-	TCHAR *path;
+	wchar_t *path;
 	unsigned int nrOfPath;
 	//FILTER NAME
 	vector<wstring> filterData;
