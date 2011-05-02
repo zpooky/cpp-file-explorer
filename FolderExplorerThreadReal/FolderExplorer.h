@@ -45,15 +45,20 @@ struct EXP_FILE_DATA
 {
 	wstring fileName;
 	wstring filePath;
-	unsigned int size;
+	size_t size;
 	wstring lastWriteTime;
 	bool isFolder;
 	DWORD dwFileAttributes;
 	FileAttribute mFileAttribute;
 	EXP_FILE_DATA()
 	{
+		fileName = L"";
+		filePath = L"";
 		size = 0;
+		lastWriteTime = L"";
 		isFolder = false;
+		dwFileAttributes = 0;
+		mFileAttribute = ATTRIBUTE_NORMAL;
 	}
 };
 
@@ -62,22 +67,22 @@ class FolderExplorer
 private:
 	//PATH
 	wstring plainPath;
+	wstring currentPath;
 	wchar_t *path;
-	unsigned int nrOfPath;
 	//FILTER NAME
 	vector<wstring> filterData;
 	//
 	WIN32_FIND_DATA data;
 	LARGE_INTEGER filesize;
-	TCHAR szDir[MAX_PATH];
+	wchar_t szDir[MAX_PATH];
 	HANDLE handler;
 	DWORD dwError;
 	/**FUNCTIONS**/
-	void convert(wstring path);
+	void convert(wstring dir);
 	bool pathLength();
 	void prepare();
 	void fetch();
-	bool filter(wstring filename);
+	bool filter(const wstring &filename);
 public:
 	//OUTPUT FILE DATA
 	vector<EXP_FILE_DATA> files;

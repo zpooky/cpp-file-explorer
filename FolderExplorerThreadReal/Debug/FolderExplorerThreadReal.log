@@ -1,4 +1,4 @@
-﻿Build started 2011-04-30 22:13:46.
+﻿Build started 2011-05-02 16:45:02.
      1>Project "C:\Users\FREDRO\Documents\Visual Studio 2010\Projects\FolderExplorerThreadReal\FolderExplorerThreadReal\FolderExplorerThreadReal.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\FolderExplorerThreadReal.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -33,4 +33,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.29
+Time Elapsed 00:00:01.82

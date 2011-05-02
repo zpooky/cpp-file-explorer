@@ -2,12 +2,11 @@
 #include <iostream>
 
 using namespace std;
-//@TODO FIX EXPAND
+//GetFileInformationByHandle
 FolderExplorer::FolderExplorer()
 {
 	//PATH
-	this->path = NULL;
-	this->nrOfPath = 0;
+	this->path = new wchar_t[MAX_PATH];
 	//
 	this->handler = INVALID_HANDLE_VALUE;
 }
@@ -29,6 +28,7 @@ bool FolderExplorer::open(wstring path)
 			this->fetch();
 			return true;
 		} else {
+			FindClose(this->handler);
 			return false;
 		}
 	}
@@ -50,14 +50,22 @@ void FolderExplorer::convert(wstring dir)
 	//	delete[]this->path;
 	//if unicode is TCHAR is wchar_t. find out a way to make that so "new" do not have to be called.c string
 	//this->path = dir.c_str();
-	this->path = new wchar_t[dir.size()+1];
-	this->path[dir.size()] = 0;
-	this->nrOfPath = dir.size();
+	//this->path = new wchar_t[dir.size()+1];
+	//this->path[dir.size()] = 0;
+	//this->nrOfPath = dir.size();
 	//As much as we'd love to, we can't use memcpy() because
 	//sizeof(TCHAR)==sizeof(char) may not be true:
-	for(unsigned int i=0;i<dir.size();++i){
-		this->path[i] = dir[i];
+	//for(unsigned int i=0;i<dir.size();++i){
+	//	this->path[i] = dir[i];
+	//}
+	errno_t error = wcscpy_s(this->path,MAX_PATH,dir.c_str());
+	if(error != 0){
+		cout<<"false"<<endl;
 	}
+		//wcout<<L"----------"<<endl;
+	//wcout<<L"converted: '"<<this->path<<L"'"<<endl;
+	//wcout<<L"dir: '"<<dir<<L"'"<<endl;
+	//wcout<<L"----------"<<endl;
 }
 /**
 * @DESC Check that the input path plus 3 is not longer than MAX_PATH.
@@ -75,8 +83,10 @@ void FolderExplorer::prepare()
 	size_t last = wcslen(this->path);
 	last = last-1 >= 0 ? last-1 : 0;
 	if(this->path[last] != L'\\'){
+		this->currentPath = wstring(this->path)+L"\\";
 		StringCchCat(this->path,MAX_PATH,TEXT("\\*"));
 	} else {
+		this->currentPath = wstring(this->path);
 		StringCchCat(this->path,MAX_PATH,TEXT("*"));
 	}
 }
@@ -84,27 +94,29 @@ void FolderExplorer::fetch()
 {
 	int i = 0,
 		nrOfFiles = 0;
-	wchar_t buffer[255] = {0};
-	EXP_FILE_DATA obj;
+	wchar_t buffer[261];
 	do{
-		for(i=0;i<lstrlen(this->data.cFileName)&&i<255;++i){
+		EXP_FILE_DATA obj;
+		for(i=0;i<lstrlen(this->data.cFileName)&&i<260;++i){
 			buffer[i] = wchar_t(this->data.cFileName[i]);
 		}
+		//buffer[i] = NULL;
+		//i++;
 		obj.fileName = wstring(buffer,i);
 		if(this->filter(obj.fileName)){
+			obj.filePath = this->currentPath;
+			obj.isFolder = (this->data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0;
+			obj.dwFileAttributes = this->data.dwFileAttributes;
+			obj.mFileAttribute = (FileAttribute)this->data.dwFileAttributes;
 			this->files.push_back(obj);
-			this->files.at(nrOfFiles).filePath = this->path;
-			this->files.at(nrOfFiles).isFolder = (this->data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0;
-			this->files.at(nrOfFiles).dwFileAttributes = this->data.dwFileAttributes;
-			this->files.at(nrOfFiles).mFileAttribute = (FileAttribute)this->data.dwFileAttributes;
 			++nrOfFiles;
 		}
 	}while(FindNextFile(this->handler,&this->data));
 	FindClose(this->handler);
 }
-bool FolderExplorer::filter(wstring filename)
+bool FolderExplorer::filter(const wstring &filename)
 {
-	for(int i=0;i<(int)this->filterData.size();++i){
+	for(size_t i=0;i<this->filterData.size();++i){
 		if(filename == this->filterData.at(i)){
 			return false;
 		}

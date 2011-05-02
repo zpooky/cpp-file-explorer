@@ -40,19 +40,26 @@ void MovieTraverser::life()
 	vector<wstring> folder;
 	this->curPath = this->root;
 	bool cont = true;
-	cout<<"____________"<<endl;
+	//cout<<"____________"<<endl;
 	do{
 		folder.clear();
 		if(this->fe->open(this->curPath)){
+			//
+			//wcout<<L"'"<<L"curPath:"<<this->curPath<<L"'"<<endl;
+			//wcout<<L"'"<<L"root:"<<this->root<<L"'"<<endl;
+			//wcout<<L"'"<<L"prevPath:"<<this->prevFolder<<L"'"<<endl;
+			//
 			for(unsigned int i=0;i<this->fe->files.size();++i){
-				//wcout<<this->fe->files.at(i).FileName<<" |"<<this->fe->files.at(i).isFolder<<"|"<<this->fe->files.at(i).dwFileAttributes<<endl;
+				////wcout<<this->fe->files.at(i).FileName<<" |"<<this->fe->files.at(i).isFolder<<"|"<<this->fe->files.at(i).dwFileAttributes<<endl;
 				if(this->fe->files[i].dwFileAttributes == 18 || this->fe->files[i].dwFileAttributes == 22 || this->fe->files[i].dwFileAttributes == 48){
-					wcout<<"No:file/folder: "<<this->fe->files[i].filePath<<this->fe->files[i].fileName<<endl;
+					////wcout<<"No:file/folder: "<<this->fe->files[i].filePath<<this->fe->files[i].fileName<<endl;
 				} else
 				if(this->fe->files[i].isFolder){
 					folder.push_back(this->fe->files.at(i).fileName);
+					//wcout<<L"'"<<L"folder:|"<<L"'"<<this->fe->files.at(i).filePath<<this->fe->files.at(i).fileName<<L"'"<<endl;
 				} else 
 				if(!this->isBack){
+					//wcout<<L"file::"<<L"'"<<this->fe->files.at(i).fileName<<L"'"<<endl;
 					this->visit(this->fe->files.at(i).fileName.c_str(),this->curPath.c_str());
 				}
 			}
@@ -60,7 +67,7 @@ void MovieTraverser::life()
 			if(this->isBack){
 				bool verify = true;
 				for(unsigned int i=0;i<folder.size() && verify;++i){
-					//cout<<"|"<<this->curFolder<<"| |"<<folder[i]<<"|"<<endl;
+					////cout<<"|"<<this->curFolder<<"| |"<<folder[i]<<"|"<<endl;
 					if(this->curFolder == folder[i]){
 						++i;
 						if(i<folder.size()){
@@ -80,7 +87,7 @@ void MovieTraverser::life()
 				}
 			} else
 			if(!this->isBack){
-				unsigned int i = 0;
+				size_t i = 0;
 				if(i<folder.size()){
 					this->isBack = false;
 					this->curPath += folder[i]+L'\\';
@@ -95,13 +102,15 @@ void MovieTraverser::life()
 				}
 			}
 		} else {
-								wcout<<this->curPath<<endl;
-					wcout<<this->root<<endl;
+			//cout<<"__Fail__"<<endl;
+			//wcout<<L"curPath:"<<this->curPath<<endl;
+			//wcout<<L"root:"<<this->root<<endl;
+			//cout<<"__"<<endl;
 			cont = false;
-			cout<<"false"<<endl;
 		}
+		//system("pause");
 	}while(cont);
-	wcout<<endl<<L"done: "<<this->root<<endl;
+	//wcout<<endl<<L"done: "<<this->root<<endl;
 }
 /**FUNCTIONS**/
 void MovieTraverser::initiate(wchar_t *root)
@@ -110,7 +119,7 @@ void MovieTraverser::initiate(wchar_t *root)
 	this->root = root;
 	this->curPath = this->root;
 	this->isBack = false;
-	if(this->fe != NULL)
+	if(this->fe != NULL)//@TODO dont delete
 		delete this->fe;
 	this->fe = new FolderExplorer();
 	this->fe->addFilter(L"..");
@@ -144,7 +153,7 @@ bool MovieTraverser::checkExt(const wchar_t *file)
 	wstring ext = this->getExt(file);
 	/*if(file.substr((file.length()-ext.length()),file.length()-1) == ext){
 	} else {
-		wcout<<file<<endl;
+		//wcout<<file<<endl;
 	}*/
 	for(unsigned int i=0;i<movieExt.size();++i){
 		if(ext == movieExt.at(i)){
@@ -161,8 +170,8 @@ bool MovieTraverser::search(wstring &str)
 }
 wstring MovieTraverser::getExt(const wstring &file)
 {
-	for(int i=(unsigned int)file.length()-1;i>=0;--i){
-		if(file[i] == '.'){
+	for(int i=file.length()-1;i>=0;--i){
+		if(file[i] == L'.'){
 			return file.substr(i+1,file.length());
 		}
 	}
@@ -171,7 +180,7 @@ wstring MovieTraverser::getExt(const wstring &file)
 void MovieTraverser::backFolder()
 {
 	for(unsigned int i=this->curPath.length()-2;i>=0;--i){
-		if(this->curPath[i] == '\\'){
+		if(this->curPath[i] == L'\\'){
 			this->curFolder = this->curPath.substr(i+1,this->curPath.length());
 			this->curFolder.resize(this->curFolder.length()-1);
 			this->curPath.resize(i+1);
@@ -183,7 +192,7 @@ void MovieTraverser::backFolder()
 void MovieTraverser::init()
 {
 	if(MovieTraverser::initCount == 0){
-		MovieTraverser::mOut->open("movies.xml",ios::out);
+		MovieTraverser::mOut->open(L"movies.xml",ios::out);
 		MovieTraverser::mXMLWriter->setStream(MovieTraverser::mOut);
 	}
 	++MovieTraverser::initCount;
